@@ -1,12 +1,13 @@
 .Side-bar
   .User-name
     .top-items
-      %h3.top-items__name まりも
+      %h3.top-items__name
+        = current_user.name
       .top-items__icons
         = link_to "#", class: "icon" do
           = icon("far", "edit")
           %span<>
-        = link_to "#", class: "icon" do
+        = link_to edit_user_path(current_user), class: "icon" do
           = icon("fas", "cog")
           %span<>
   .Side-bar-group
