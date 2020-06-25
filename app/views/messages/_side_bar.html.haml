@@ -4,16 +4,17 @@
       %h3.top-items__name
         = current_user.name
       .top-items__icons
-        = link_to "#", class: "icon" do
+        = link_to new_group_path, class: "icon" do
           = icon("far", "edit")
           %span<>
         = link_to edit_user_path(current_user), class: "icon" do
           = icon("fas", "cog")
           %span<>
   .Side-bar-group
-    %ul.group-list
-      %li.group-list__name techcamp
-      %li.group-list__message まだメッセージがありません
-    %ul.group-list
-      %li.group-list__name techcamp
-      %li.group-list__message まだメッセージがありません
+    - current_user.groups.each do |group|
+      .group-list
+        = link_to "#" do
+          .group-list__name
+            = group.name
+          .group-list__message
+            まだメッセージがありません
