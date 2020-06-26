@@ -1,27 +1,31 @@
 .Chat-main
   .Main-header
     .group-info
-      .group-info__name test
+      .group-info__name
+        =  @group.name
       %ul.group-info__memberlist 
-        Member：
-        %li.group-info__memberlist__member まりも
-    = link_to "Edit", "#", class: "group-edit"
+        - @group.users.each do |user|
+          = user.name
+        %li.group-info__memberlist__member
+    = link_to "Edit", edit_group_path(current_user), class: "group-edit"
   .Messages-list
-    .messages-list-box
-      %ul.messages-list-box__info
-        %li.messages-list-box__info__name まりも
-        %li.messages-list-box__info__deta 2020/6/23/(Tus) 14:35
-      .messages-list-box__message おはよう！
-    .messages-list-box
-      %ul.messages-list-box__info
-        %li.messages-list-box__info__name まりも
-        %li.messages-list-box__info__deta 2020/6/23/(Tus) 14:35
-      .messages-list-box__message 今日は夜から雨
+    = render @messages
+    -# .messages-list-box
+    -#   %ul.messages-list-box__info
+    -#     %li.messages-list-box__info__name まりも
+    -#     %li.messages-list-box__info__deta 2020/6/23/(Tus) 14:35
+    -#   .messages-list-box__message おはよう！
+    -# .messages-list-box
+    -#   %ul.messages-list-box__info
+    -#     %li.messages-list-box__info__name まりも
+    -#     %li.messages-list-box__info__deta 2020/6/23/(Tus) 14:35
+    -#   .messages-list-box__message 今日は夜から雨
   .Message-form
-    %form.Form__contents
-      .input-box
-        %input.input-box__text{"placeholder": "type a message", "type": "text"}
-        %label{class: "input-box__image"}
-          = icon('fas', 'image')
-          %input{type: "file", class: "input-box__image__btn"}
-      %input.submitbtn{"name": "commit", "type": "submit", "value": "Send"}
+    = form_with model: [@group, @message], html: {class: "Form"}, local: true do |f|
+      .Form__contents
+        .input-box
+          = f.text_field :content, class: 'input-box__text', placeholder: "type a message"
+          = f.label :image, class: "input-box__image" do
+            = icon('fas', 'image')
+            = f.file_field :image, class: "input-box__image__btn"
+        = f.submit 'Send', class: "submitbtn" 
