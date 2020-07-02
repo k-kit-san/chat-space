@@ -10,16 +10,6 @@
     = link_to "Edit", edit_group_path(current_user), class: "group-edit"
   .Messages-list
     = render @messages
-    -# .messages-list-box
-    -#   %ul.messages-list-box__info
-    -#     %li.messages-list-box__info__name まりも
-    -#     %li.messages-list-box__info__deta 2020/6/23/(Tus) 14:35
-    -#   .messages-list-box__message おはよう！
-    -# .messages-list-box
-    -#   %ul.messages-list-box__info
-    -#     %li.messages-list-box__info__name まりも
-    -#     %li.messages-list-box__info__deta 2020/6/23/(Tus) 14:35
-    -#   .messages-list-box__message 今日は夜から雨
   .Message-form
     = form_with model: [@group, @message], html: {class: "Form"}, local: true do |f|
       .Form__contents
