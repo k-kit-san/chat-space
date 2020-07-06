@@ -3,7 +3,8 @@
     .group-info
       .group-info__name
         =  @group.name
-      %ul.group-info__memberlist 
+      %ul.group-info__memberlist
+        Member:
         - @group.users.each do |user|
           = user.name
         %li.group-info__memberlist__member
